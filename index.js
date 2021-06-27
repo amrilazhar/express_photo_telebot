@@ -1,7 +1,9 @@
 require("dotenv").config({
 	path: `.env.${process.env.NODE_ENV}`,
 });
+
 const { Telegraf } = require("telegraf");
+const myHandler = require('./helpers/requestHandler');
 
 const token = process.env.BOT_TOKEN;
 if (token === undefined) {
@@ -17,14 +19,14 @@ bot.start((ctx) => {
 
 bot.on("text", (ctx) => {
 	console.log("pesan masuk");
-    console.log(ctx)
+    console.log(ctx.message.text)
 	ctx.replyWithHTML("<b>Hello im from server</b>");
 });
 
 // npm install -g localtunnel && lt --port 3000
 bot.launch({
 	webhook: {
-		domain: "https://angry-sloth-12.loca.lt",
-		port: 4000,
+		domain: "https://chilly-chipmunk-76.loca.lt",
+		port: 3000,
 	},
 });
