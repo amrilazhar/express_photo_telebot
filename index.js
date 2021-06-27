@@ -36,7 +36,7 @@ bot.on("text", async (ctx) => {
 // npm install -g localtunnel && lt --port 3000
 bot.launch({
 	webhook: {
-		domain: "https://red-fly-47.loca.lt",
-		port: 3000,
+		domain: process.env.DOMAIN,
+		port: process.env.PORT,
 	},
 });
