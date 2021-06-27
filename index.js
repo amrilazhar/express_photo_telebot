@@ -1,28 +1,30 @@
 require("dotenv").config({
 	path: `.env.${process.env.NODE_ENV}`,
 });
+const { Telegraf } = require("telegraf");
 
-const express = require('express') 
-const { Telegraf } = require('telegraf') 
-
-
-const token = process.env.BOT_TOKEN
+const token = process.env.BOT_TOKEN;
 if (token === undefined) {
-  throw new Error('BOT_TOKEN must be provided!')
+	throw new Error("BOT_TOKEN must be provided!");
 }
 
-const bot = new Telegraf(token)
+const bot = new Telegraf(token);
 // Set the bot response
-bot.on('text', (ctx) => ctx.replyWithHTML('<b>Hello</b>'))
+bot.start((ctx) => {
+	console.log("pesan start");
+	ctx.replyWithHTML("<b>Hello it's started</b>");
+});
 
-// Set telegram webhook
+bot.on("text", (ctx) => {
+	console.log("pesan masuk");
+    console.log(ctx)
+	ctx.replyWithHTML("<b>Hello im from server</b>");
+});
+
 // npm install -g localtunnel && lt --port 3000
-bot.telegram.setWebhook('https://wonderful-dragon-70.loca.lt/secret-path')
-
-const app = express()
-app.get('/', (req, res) => res.send('Hello World!'))
-// Set the bot API endpoint
-app.use(bot.webhookCallback('/secret-path'))
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!')
-})
+bot.launch({
+	webhook: {
+		domain: "https://angry-sloth-12.loca.lt",
+		port: 4000,
+	},
+});
