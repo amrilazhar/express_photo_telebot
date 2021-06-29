@@ -14,7 +14,6 @@ if (token === undefined) {
 const bot = new Telegraf(token);
 // Set the bot response
 bot.start((ctx) => {
-	console.log("pesan start");
 	ctx.replyWithHTML("<b>Hello it's started</b>");
 });
 
